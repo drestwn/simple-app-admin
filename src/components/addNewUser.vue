@@ -7,7 +7,14 @@ import { RouterLink } from 'vue-router';
 export default {
     name: "addNewUser",
     computed: {
-        ...mapState(useGetOneStore, ["userDataOne"])
+        ...mapState(useGetOneStore, ["userDataOne"]),
+        isFormComplete() {
+            const { firstName, lastName, imageUrl, email } = this.addNewUserData;
+            return firstName && lastName && imageUrl && email;
+        },
+        maskedLastName() {
+            return this.addNewUserData.lastName.replace(/./g, '*');
+        },
     },
     data() {
         return {
@@ -48,7 +55,7 @@ export default {
                 <div class="mb-3">
                     <label for="product-name">Last Name <span class="text-danger fw-bold">*</span></label>
                     <input type="text" class="form-control" placeholder="Enter Last name" autocomplete="off" required
-                        v-model="this.addNewUserData.lastName" />
+                        :value="maskedLastName" @input="addNewUserData.lastName = $event.target.value" />
                 </div>
 
                 <div class="mb-3">
@@ -69,7 +76,7 @@ export default {
                     </div>
                     <div class="col-6">
                         <button class="btn btn-lg btn-primary rounded-pill w-100 p-2" type="submit"
-                            @click.prevent="postUser(this.addNewUserData)">
+                            @click.prevent="postUser(this.addNewUserData)" :disabled="!isFormComplete">
                             Submit
                         </button>
 

@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router'
+import Swal from 'sweetalert2'
 
 export const useUserStore = defineStore('users', {
   state: () => ({
@@ -31,6 +32,10 @@ export const useUserStore = defineStore('users', {
         }
         const data = await response.json()
         console.log(data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Data has been deleted successfully'
+        })
         this.users = this.users.filter((user) => user.id !== id)
       } catch (err) {
         console.log(err)
@@ -56,9 +61,13 @@ export const useUseraddStore = defineStore('user', {
         if (!response.ok) {
           throw new Error('Error Post data')
         }
-        // const data = await response.json()
-        console.log(response.json())
+        const datares = await response.json()
+        console.log(datares)
         // this.users = data.users
+        Swal.fire({
+          icon: 'success',
+          title: 'Data has been added'
+        })
         router.push('/')
       } catch (err) {
         console.log(err)
@@ -132,6 +141,10 @@ export const useUpdateUserStore = defineStore('UpdateUser', {
         }
         const resData = await response.json()
         console.log(resData, 'ini hasil response')
+        Swal.fire({
+          icon: 'success',
+          title: 'Data has been updated successfully'
+        })
         router.push(`/`)
       } catch (err) {
         console.log(err)
