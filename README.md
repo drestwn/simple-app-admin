@@ -33,4 +33,8 @@ npm run build
 ```sh
 npm run lint
 ```
+
 # simple-app-admin
+
+This is a simple app of admin using free api from dummyJson.com
+Here is to check more api docs for dummy json https://dummyjson.com/docs/users
