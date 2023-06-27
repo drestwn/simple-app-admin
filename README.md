@@ -38,3 +38,5 @@ npm run lint
 
 This is a simple app of admin using free api from dummyJson.com
 Here is to check more api docs for dummy json https://dummyjson.com/docs/users
+
+Using Pinia as state management global
